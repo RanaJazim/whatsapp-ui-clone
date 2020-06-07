@@ -1,4 +1,5 @@
 import 'package:whatsapp_ui_clone/src/screens/chat.dart';
+import 'package:whatsapp_ui_clone/src/screens/friends.dart';
 
 import 'package:flutter/material.dart';
 
@@ -10,18 +11,33 @@ class HomeScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Messanger"),
-          bottom: TabBar(
-            indicatorSize: TabBarIndicatorSize.label,
-            indicatorColor: Colors.white,
-            tabs: <Widget>[
-              Tab(text: "CHATS"),
-              Tab(text: "STATUS"),
-              Tab(text: "FRIENDS"),
-            ],
-          ),
+          actions: _actionButtons(),
+          bottom: _buildTabs(),
         ),
         body: _buildContent(context),
       ),
+    );
+  }
+
+  List<Widget> _actionButtons() {
+    return [
+      IconButton(
+        icon: const Icon(Icons.search),
+        onPressed: () {},
+      ),
+      const Icon(Icons.more_vert)
+    ];
+  }
+
+  Widget _buildTabs() {
+    return TabBar(
+      indicatorSize: TabBarIndicatorSize.label,
+      indicatorColor: Colors.white,
+      tabs: <Widget>[
+        Tab(text: "CHATS"),
+        Tab(text: "STATUS"),
+        Tab(text: "FRIENDS"),
+      ],
     );
   }
 
@@ -30,11 +46,9 @@ class HomeScreen extends StatelessWidget {
       children: <Widget>[
         ChatScreen(),
         Center(
-          child: Text("Status"),
-        ),
-        Center(
           child: Text("Friends"),
         ),
+        FriendScreen(),
       ],
     );
   }

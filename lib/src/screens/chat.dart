@@ -1,3 +1,6 @@
+import 'package:whatsapp_ui_clone/src/screens/single_chat.dart';
+import 'package:whatsapp_ui_clone/src/widgets/list_divider.dart';
+
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 
@@ -9,10 +12,7 @@ class ChatScreen extends StatelessWidget {
       itemBuilder: (_, index) => Column(
         children: <Widget>[
           _SingleChatItem(),
-          Padding(
-            padding: EdgeInsets.only(left: 20, right: 20),
-            child: Divider(),
-          ),
+          ListDivider(),
         ],
       ),
     );
@@ -20,6 +20,15 @@ class ChatScreen extends StatelessWidget {
 }
 
 class _SingleChatItem extends StatelessWidget {
+  void _navigateToSingleChatScreen(context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => SingleChatScreen(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -35,6 +44,7 @@ class _SingleChatItem extends StatelessWidget {
         overflow: TextOverflow.ellipsis,
       ),
       trailing: _trailing(),
+      onTap: () => _navigateToSingleChatScreen(context),
     );
   }
 
