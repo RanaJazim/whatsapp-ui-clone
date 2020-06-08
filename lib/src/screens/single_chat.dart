@@ -34,6 +34,7 @@ class SingleChatScreen extends StatelessWidget {
                   fontSize: 16,
                 ),
               ),
+              SizedBox(height: 5),
               Text(
                 "Typing a message..",
                 style: TextStyle(
@@ -59,7 +60,7 @@ class SingleChatScreen extends StatelessWidget {
         Expanded(
           child: _Chat(),
         ),
-        _Message(),
+        _MessageInput(),
       ],
     );
   }
@@ -70,43 +71,43 @@ class _Chat extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: <Widget>[
-        _SingleChat(true),
-        _SingleChat(true),
-        _SingleChat(false),
-        _SingleChat(true),
-        _SingleChat(false),
-        _SingleChat(true),
-        _SingleChat(true),
-        _SingleChat(true),
-        _SingleChat(false),
-        _SingleChat(true),
+        _SingleChat(isFriendChat: true),
+        _SingleChat(isFriendChat: true),
+        _SingleChat(isFriendChat: false),
+        _SingleChat(isFriendChat: true),
+        _SingleChat(isFriendChat: false),
+        _SingleChat(isFriendChat: true),
+        _SingleChat(isFriendChat: true),
+        _SingleChat(isFriendChat: true),
+        _SingleChat(isFriendChat: true),
+        _SingleChat(isFriendChat: false),
       ],
     );
   }
 }
 
 class _SingleChat extends StatelessWidget {
-  final bool _isOpponent;
+  final bool isFriendChat;
 
-  _SingleChat(this._isOpponent);
+  _SingleChat({this.isFriendChat});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
         top: 10,
-        right: _isOpponent ? 0.0 : 10.0,
-        left: _isOpponent ? 10.0 : 0.0,
+        right: isFriendChat ? 0.0 : 10.0,
+        left: isFriendChat ? 10.0 : 0.0,
       ),
       child: Align(
-        alignment: _isOpponent ? Alignment.topLeft : Alignment.topRight,
+        alignment: isFriendChat ? Alignment.topLeft : Alignment.topRight,
         child: Container(
           width: MediaQuery.of(context).size.width * 0.85,
           padding: EdgeInsets.all(10),
           decoration: BoxDecoration(
             border: Border.all(
               color:
-                  _isOpponent ? Theme.of(context).primaryColor : Colors.green,
+                  isFriendChat ? Theme.of(context).primaryColor : Colors.green,
               width: 1.0,
               style: BorderStyle.solid,
             ),
@@ -114,7 +115,7 @@ class _SingleChat extends StatelessWidget {
           ),
           child: Text(
             "Some text here here here here ..",
-            textDirection: _isOpponent ? TextDirection.ltr : TextDirection.rtl,
+            textDirection: isFriendChat ? TextDirection.ltr : TextDirection.rtl,
             style: TextStyle(
               letterSpacing: 0.3,
               height: 1.5,
@@ -127,7 +128,7 @@ class _SingleChat extends StatelessWidget {
   }
 }
 
-class _Message extends StatelessWidget {
+class _MessageInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
